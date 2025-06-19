@@ -23,11 +23,17 @@ def parse_bpseq_file(filepath):
 
     # build dot-bracket
     dot = ['.' for _ in bases]
-    used = set()
-    for i, j in pair_map.items():
-        if i not in used and j not in used and 0 <= i < len(bases) and 0 <= j < len(bases):
-            dot[i], dot[j] = '(', ')'
-            used.update((i, j))
+used = set()
+
+for i, j in pair_map.items():
+    # Convert 1-based to 0-based
+    i, j = i - 1, j - 1
+    if i < 0 or j < 0 or i >= len(bases) or j >= len(bases):
+        continue
+    if i not in used and j not in used:
+        dot[i] = '('
+        dot[j] = ')'
+        used.update([i, j])
 
     return ''.join(bases), ''.join(dot)
 
