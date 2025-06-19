@@ -1,5 +1,6 @@
 import os
 import zipfile
+import numpy as np
 
 def parse_bpseq_file(filepath):
     """Parses a single .bpseq into (sequence, dot-bracket)"""
@@ -70,3 +71,15 @@ def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', 
                 print(f"Skipping {fpath}: {e}")
 
     return all_data
+# One-hot encoding function for RNA sequences
+def one_hot_encode(sequence):
+    mapping = {'A': 0, 'U': 1, 'G': 2, 'C': 3}
+    one_hot = np.zeros((len(sequence), 4))
+    for i, base in enumerate(sequence):
+        if base in mapping:
+            one_hot[i, mapping[base]] = 1
+    return one_hot
+
+# Convert dot-bracket structure to paired/unpaired labels
+def structure_to_labels(dotbracket):
+    return np.array([1 if b in ['(', ')'] else 0 for b in dotbracket])
