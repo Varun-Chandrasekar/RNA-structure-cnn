@@ -80,6 +80,7 @@ def one_hot_encode(sequence):
             one_hot[i, mapping[base]] = 1
     return one_hot
 
-# Convert dot-bracket structure to paired/unpaired labels
+# Convert dot-bracket structure to labels
 def structure_to_labels(dotbracket):
-    return np.array([1 if b in ['(', ')'] else 0 for b in dotbracket])
+    mapping = {'.': 0, '(': 1, ')': 2}
+    return np.array([mapping[char] for char in dotbracket])
