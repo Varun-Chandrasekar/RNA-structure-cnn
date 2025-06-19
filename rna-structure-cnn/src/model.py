@@ -7,7 +7,7 @@ class RNACNN(nn.Module):
         super(RNACNN, self).__init__()
         self.conv1 = nn.Conv1d(4, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv1d(16, 32, kernel_size=3, padding=1)
-        self.fc = nn.Linear(32, 2)
+        self.fc = nn.Linear(32, 3)
 
     def forward(self, x):
         x = x.permute(0, 2, 1)
