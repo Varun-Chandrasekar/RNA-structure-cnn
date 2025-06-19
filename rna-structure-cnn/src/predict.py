@@ -9,12 +9,16 @@ def load_model(model_path='models/rna_cnn_trained.pt'):
     model.eval()
     return model
 
+def decode_structure(predicted):
+    mapping = {0: '.', 1: '(', 2: ')'}
+    return ''.join([mapping.get(int(p), '.') for p in predicted])
+
 def predict_structure(model, rna_seq):
     x_tensor = torch.tensor(one_hot_encode(rna_seq), dtype=torch.float32).unsqueeze(0)
     with torch.no_grad():
         output = model(x_tensor)
         predicted = torch.argmax(output, dim=-1).squeeze(0)
-        structure = ''.join(['(' if p == 1 else '.' for p in predicted[:len(rna_seq)]])
+        structure = decode_structure(predicted[:len(rna_seq)])
     return structure
 
 if __name__ == "__main__":
