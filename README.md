@@ -4,7 +4,7 @@ This project implements a deep learning model (convolution neural network (CNN))
 ---
 
 ## Data
-This project currently accepts only .bpseq and .txt files from the data folder
+This project currently accepts only .bpseq, .dbn and .txt files from the data folder
 
 ---
 
