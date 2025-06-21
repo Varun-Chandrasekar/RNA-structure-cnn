@@ -41,9 +41,9 @@ A simple 1D-CNN that classifies each base in the RNA sequence as paired (1) or u
 - Trained on filtered bpRNA dataset (≤300 nt)
 
 ## First Final  Evaluation Metrics 
-- Total samples used: 27,366
-- Final validation loss: 0.9677
-- Final validation accuracy: 52.84%
+- Total samples used: 24,838
+- Final validation loss: 0.9522
+- Final validation accuracy: 55.64%
 
 ##  Prediction
 
