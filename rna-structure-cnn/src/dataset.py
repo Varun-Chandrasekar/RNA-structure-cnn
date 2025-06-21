@@ -66,7 +66,7 @@ def parse_dbn_file(filepath):
     
     return seq, struct
 
-def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', '.txt','.dbn')):
+def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', '.txt','.dbn'), max_length=300):
     all_data = []
     for root, dirs, files in os.walk(main_path):
         for fname in files:
@@ -80,15 +80,15 @@ def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', 
             try:
                 if fname.endswith('.bpseq'):
                     seq, struct = parse_bpseq_file(fpath)
-                    if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct):
+                    if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct) and len (seq) <= max_length:
                         all_data.append((seq, struct))
                 elif fname.endswith('.dbn'):
                     seq, struct = parse_dbn_file(fpath)
-                    if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct):
+                    if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct) and len (seq) <= max_length:
                         all_data.append((seq, struct))
                 elif fname.endswith('.txt'):
                     for seq, struct in parse_three_line_txt(fpath):
-                        if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct):
+                        if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct) and len(seq) <= max_length:
                             all_data.append((seq, struct))
             except Exception as e:
                 print(f"Skipping {fpath}: {e}")
