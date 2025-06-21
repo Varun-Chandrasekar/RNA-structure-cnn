@@ -47,24 +47,20 @@ def parse_three_line_txt(filepath):
             if len(seq) == len(struct):
                 out.append((seq, struct))
     return out
-
 def parse_dbn_file(filepath):
     """Parses a .dbn file into (sequence, dot-bracket structure)"""
     with open(filepath, 'r') as f:
         lines = [line.strip() for line in f if line.strip()]
     
-    # 3-line format
-    if len(lines) >= 3 and not any(c in lines[0] for c in "AUGC"):
-        seq = lines[1].upper()
-        struct = lines[2]
-    # 2-line format
-    elif len(lines) >= 2:
-        seq = lines[0].upper()
-        struct = lines[1]
+    # Skip metadata lines
+    content_lines = [line for line in lines if not line.startswith("#")]
+    
+    if len(content_lines) >= 2:
+        seq = content_lines[0].upper()
+        struct = content_lines[1]
+        return seq, struct
     else:
         raise ValueError(f"File {filepath} is not a valid .dbn file format.")
-    
-    return seq, struct
 
 def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', '.txt','.dbn'), max_length=300):
     all_data = []
