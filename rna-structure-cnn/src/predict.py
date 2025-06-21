@@ -10,7 +10,12 @@ def load_model(model_path='models/rna_cnn_trained.pt'):
     return model
 
 def decode_structure(predicted):
-    mapping = {0: '.', 1: '(', 2: ')'}
+    mapping = {
+        '.': 0, '(': 1, ')': 2,
+        '[': 3, ']': 4,
+        '{': 5, '}': 6,
+        '<': 7, '>': 8
+    }
     return ''.join([mapping.get(int(p), '.') for p in predicted])
 
 def predict_structure(model, rna_seq):
