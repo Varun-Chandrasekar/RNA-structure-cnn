@@ -43,7 +43,7 @@ val_accuracies = []
 # Training loop
 train_loader = DataLoader(train_dataset, batch_size=16, collate_fn=collate_batch, shuffle=True)
 train_losses = []
-for epoch in range(50):
+for epoch in range(20):
     model.train()
     epoch_loss = 0.0
     num_batches = 0
@@ -64,7 +64,7 @@ for epoch in range(50):
     train_losses.append(avg_loss)
 
     if (epoch + 1) % 10 == 0:
-        print(f"Epoch [{epoch+1}/50], Avg Loss: {avg_loss:.4f}")
+        print(f"Epoch [{epoch+1}/20], Avg Loss: {avg_loss:.4f}")
 
 # Final evaluation
 def evaluate_model(model, val_loader, criterion):
