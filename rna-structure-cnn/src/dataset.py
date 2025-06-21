@@ -48,8 +48,25 @@ def parse_three_line_txt(filepath):
                 out.append((seq, struct))
     return out
 
+def parse_dbn_file(filepath):
+    """Parses a .dbn file into (sequence, dot-bracket structure)"""
+    with open(filepath, 'r') as f:
+        lines = [line.strip() for line in f if line.strip()]
+    
+    # 3-line format
+    if len(lines) >= 3 and not any(c in lines[0] for c in "AUGC"):
+        seq = lines[1].upper()
+        struct = lines[2]
+    # 2-line format
+    elif len(lines) >= 2:
+        seq = lines[0].upper()
+        struct = lines[1]
+    else:
+        raise ValueError(f"File {filepath} is not a valid .dbn file format.")
+    
+    return seq, struct
 
-def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', '.txt')):
+def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', '.txt','.dbn')):
     all_data = []
     for root, dirs, files in os.walk(main_path):
         for fname in files:
@@ -63,6 +80,10 @@ def load_from_inner_folder(main_path, name_filter=None, allowed_exts=('.bpseq', 
             try:
                 if fname.endswith('.bpseq'):
                     seq, struct = parse_bpseq_file(fpath)
+                    if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct):
+                        all_data.append((seq, struct))
+                elif fname.endswith('.dbn'):
+                    seq, struct = parse_dbn_file(fpath)
                     if set(seq).issubset({'A', 'U', 'G', 'C'}) and len(seq) == len(struct):
                         all_data.append((seq, struct))
                 elif fname.endswith('.txt'):
