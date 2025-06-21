@@ -17,7 +17,7 @@ def predict_structure(model, rna_seq):
     x_tensor = torch.tensor(one_hot_encode(rna_seq), dtype=torch.float32).unsqueeze(0)
     with torch.no_grad():
         output = model(x_tensor)
-        predicted = torch.argmax(output, dim=-1).squeeze(0)
+        predicted = torch.argmax(output, dim=-1)[0]
         structure = decode_structure(predicted[:len(rna_seq)])
     return structure
 
