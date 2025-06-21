@@ -38,7 +38,7 @@ A simple 1D-CNN that classifies each base in the RNA sequence as paired (1) or u
 - One-hot encodes RNA sequences (A, U, G, C)
 - CNN learns per-base paired vs unpaired prediction
 - Output is dot-bracket notation structure
-- Trained on filtered bpRNA dataset (≤100 nt)
+- Trained on filtered bpRNA dataset (≤300 nt)
 
 ## First Final  Evaluation Metrics 
 - Total samples used: 27,366
