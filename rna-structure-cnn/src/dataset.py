@@ -102,5 +102,11 @@ def one_hot_encode(sequence):
 
 # Convert dot-bracket structure to labels
 def structure_to_labels(dotbracket):
-    mapping = {'.': 0, '(': 1, ')': 2}
-    return np.array([mapping[char] for char in dotbracket])
+    # Use unique labels for each bracket pair
+    mapping = {
+        '.': 0, '(': 1, ')': 2,
+        '[': 3, ']': 4,
+        '{': 5, '}': 6,
+        '<': 7, '>': 8
+    }
+    return np.array([mapping.get(char, 0) for char in dotbracket])
