@@ -42,8 +42,8 @@ A simple 1D-CNN that classifies each base in the RNA sequence as paired (1) or u
 
 ## First Final  Evaluation Metrics 
 - Total samples used: 124,620
-- Final validation loss: 0.9522
-- Final validation accuracy: 55.64%
+- Final validation loss: 0.9774
+- Final validation accuracy: 55.20%
 
 ##  Prediction
 
