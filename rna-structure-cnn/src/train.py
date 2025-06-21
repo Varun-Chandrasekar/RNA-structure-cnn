@@ -51,7 +51,7 @@ for epoch in range(50):
     for x_batch, y_batch in train_loader:
         optimizer.zero_grad()
         outputs = model(x_batch)
-        outputs = outputs.contiguous().view(-1, 3)
+        outputs = outputs.contiguous().view(-1, 9)
         y_batch = y_batch.view(-1)
         loss = criterion(outputs, y_batch)
         loss.backward()
@@ -76,7 +76,7 @@ def evaluate_model(model, val_loader, criterion):
     with torch.no_grad():
         for x_batch, y_batch in val_loader:
             outputs = model(x_batch)  # shape: (batch, seq_len, 3)
-            outputs = outputs.contiguous().view(-1, 3)
+            outputs = outputs.contiguous().view(-1, 9)
             y_batch_flat = y_batch.view(-1)
 
             loss = criterion(outputs, y_batch_flat)
