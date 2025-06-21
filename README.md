@@ -28,7 +28,7 @@ rna-structure-cnn-complete/
 ```
 
 ## Dataset
-- **Main training dataset**: 27,366 RNA records from bp_RNA_1m_90 (https://bprna.cgrb.oregonstate.edu/) [not included in repo due to size].
+- **Main training dataset**: 124,620 RNA records from bp_RNA_1m_90 (https://bprna.cgrb.oregonstate.edu/) [not included in repo due to size].
 - **Sample dataset**: `data/sample_bprna_100.txt` contains 100 short RNA records for testing.
 ---
 
@@ -41,7 +41,7 @@ A simple 1D-CNN that classifies each base in the RNA sequence as paired (1) or u
 - Trained on filtered bpRNA dataset (≤300 nt)
 
 ## First Final  Evaluation Metrics 
-- Total samples used: 24,838
+- Total samples used: 124,620
 - Final validation loss: 0.9522
 - Final validation accuracy: 55.64%
 
